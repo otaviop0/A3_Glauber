@@ -12,6 +12,7 @@ from haversine import haversine  # Função para calcular a distância entre coo
 
 # Chave da OpenCage API
 api_key = "b431b8eeb3bf4c58a5bb82877d41b534"  # Chave para acessar a API de geolocalização
+#Key_OP 00ceb07d37a34c7db5abf142fa3b62e2
 
 # Centros de distribuição com suas coordenadas (latitude, longitude)
 centros_distribuicao = {
