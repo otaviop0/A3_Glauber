@@ -1,0 +1,106 @@
+TESTE DE CIDADES PROXIMAS AO centro de distribuição atr 400km
+
+
+===== DETALHES DA ENTREGA =====
+Centro de Distribuição: São Paulo
+Destino: santos
+Peso da Carga: 13400.00 kg
+Distância: 52.69 km
+Caminhão Escolhido: Caminhão Truck (3 eixos)
+Quantidade de horas Estimado para Entrega: 0.88 horas
+Prazo Estimado: 1 dias
+Custo de Combustível: R$ 126.46
+
+===== DETALHES DA ENTREGA =====
+Centro de Distribuição: Recife
+Destino: joão pessoa
+Peso da Carga: 100.00 kg
+Distância: 99.63 km
+Caminhão Escolhido: Van
+Quantidade de horas Estimado para Entrega: 1.25 horas
+Prazo Estimado: 1 dias
+Custo de Combustível: R$ 59.78
+
+===== DETALHES DA ENTREGA =====
+Centro de Distribuição: Brasília
+Destino: goiania
+Peso da Carga: 4000.00 kg
+Distância: 173.25 km
+Caminhão Escolhido: Caminhão Toco (2 eixos)
+Quantidade de horas Estimado para Entrega: 2.47 horas
+Prazo Estimado: 1 dias
+Custo de Combustível: R$ 259.87
+ 
+
+===== DETALHES DA ENTREGA =====
+Centro de Distribuição: Belém
+Destino: macapa
+Peso da Carga: 11999.00 kg
+Distância: 330.31 km
+Caminhão Escolhido: Caminhão Truck (3 eixos)
+Quantidade de horas Estimado para Entrega: 5.51 horas
+Prazo Estimado: 1 dias
+Custo de Combustível: R$ 792.75
+
+Centro de Distribuição: Florianópolis
+Destino: blumenau
+Peso da Carga: 11234.00 kg
+Distância: 90.92 km
+Caminhão Escolhido: Caminhão Truck (3 eixos)
+Quantidade de horas Estimado para Entrega: 1.52 horas
+Prazo Estimado: 1 dias
+Custo de Combustível: R$ 218.22
+
+
+--------------------
+TEXTE COM GRANDE DISTANCIAS + de 500km
+
+===== DETALHES DA ENTREGA =====
+Centro de Distribuição: Belém
+Destino: manaus
+Peso da Carga: 9000.00 kg
+Distância: 1290.33 km
+Caminhão Escolhido: Caminhão Truck (3 eixos)
+Quantidade de horas Estimado para Entrega: 21.51 horas
+Prazo Estimado: 2 dias
+Custo de Combustível: R$ 3096.79
+
+===== DETALHES DA ENTREGA =====
+Centro de Distribuição: Recife
+Destino: fortaleza
+Peso da Carga: 4000.00 kg
+Distância: 626.81 km
+Caminhão Escolhido: Caminhão Toco (2 eixos)
+Quantidade de horas Estimado para Entrega: 8.95 horas
+Prazo Estimado: 1 dias
+Custo de Combustível: R$ 940.21
+
+===== DETALHES DA ENTREGA =====
+Centro de Distribuição: Florianópolis
+Destino: pelotas
+Peso da Carga: 900.00 kg
+Distância: 591.28 km
+Caminhão Escolhido: Van
+Quantidade de horas Estimado para Entrega: 7.39 horas
+Prazo Estimado: 1 dias
+Custo de Combustível: R$ 354.77 
+
+===== DETALHES DA ENTREGA =====
+Centro de Distribuição: São Paulo
+Destino: ipatinga
+Peso da Carga: 500.00 kg
+Distância: 620.81 km
+Caminhão Escolhido: Van
+Quantidade de horas Estimado para Entrega: 7.76 horas
+Prazo Estimado: 1 dias
+Custo de Combustível: R$ 372.49  
+
+===== DETALHES DA ENTREGA =====
+Centro de Distribuição: Brasília
+Destino: cuiabá
+Peso da Carga: 13400.00 kg
+Distância: 874.79 km
+Caminhão Escolhido: Caminhão Truck (3 eixos)
+Quantidade de horas Estimado para Entrega: 14.58 horas
+Prazo Estimado: 1 dias
+Custo de Combustível: R$ 2099.49
