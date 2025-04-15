@@ -1,13 +1,17 @@
-from geolocalizacao import encontrar_centro_proximo
+from geolocalizacao import encontrar_centro_proximo, cidades_destino
 from entregas import Entrega, entregas
 from caminhoes import escolher_caminhao
 
-#Abaixo comando para abrir no terminal e instalar as bibliotecas necessárias
-# pip install requests
-# pip install haversine
-
+# Função para exibir as cidades disponíveis para entrega
+def exibir_cidades_disponiveis():
+    print("\n" * 2) 
+    print("Cidades disponíveis para entrega:", end=" ")
+    print(", ".join(cidades_destino))
 
 while True:
+    # Exibe as cidades disponíveis para entrega
+    exibir_cidades_disponiveis()
+    
     print("\n==== MENU ====")
     print("1 - Realizar nova entrega")
     print("2 - Ver entregas realizadas")
@@ -15,9 +19,14 @@ while True:
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
-        cidade_destino = input("Digite a cidade de destino: ")
-        
-        peso = float(input("Digite o peso da carga (em kg, peso Máximo 14000):"))
+        while True:
+            cidade_destino = input("Digite a cidade de destino: ").strip().title()
+            if cidade_destino in cidades_destino:
+                break
+            else:
+                print("Cidade inválida. Escolha entre:", ", ".join(cidades_destino))
+
+        peso = float(input("Digite o peso da carga (em kg, peso máximo 14000): "))
 
         centro, distancia = encontrar_centro_proximo(cidade_destino)
 
@@ -28,7 +37,6 @@ while True:
         caminhao, consumo, prazo, custo, horas_estimadas = escolher_caminhao(centro, peso, distancia)
 
         if caminhao is not None:
-            # Criando uma instância de Entrega com todos os atributos necessários
             entrega = Entrega(cidade_destino, centro, distancia, caminhao, prazo, custo, horas_estimadas, peso)
             entregas.append(entrega)
             print(entrega.detalhes_entrega())

@@ -1,4 +1,6 @@
+import math  # adiciona no topo do arquivo
 # Classe que representa um caminhão com seus atributos e métodos relacionados ao transporte
+
 class Caminhao:
     def __init__(self, tipo, peso_maximo, consumo_por_km, velocidade_media, horas_max):
         self.tipo = tipo  # Tipo do caminhão (ex: Van, Toco, Truck)
@@ -20,7 +22,7 @@ class Caminhao:
         # Calcula o prazo estimado da entrega em dias com base na distância e tempo de rodagem por dia
         tempo_total_horas = distancia_km / self.velocidade_media
         dias = tempo_total_horas / self.horas_max
-        return max(1, round(dias))  # Garante que o prazo mínimo seja de 1 dia
+        return max(1, math.ceil(dias))  # Garante que o prazo mínimo seja de 1 dia
 
 # Dicionário que representa a quantidade de caminhões disponíveis em cada centro de distribuição
 centros_distribuicao_caminhoes = {
@@ -80,6 +82,6 @@ def escolher_caminhao(centro, peso, distancia_km):
     consumo = melhor_caminhao.calcular_consumo(distancia_km)
     prazo = melhor_caminhao.calcular_prazo(distancia_km)
     custo = melhor_caminhao.calcular_custo_combustivel(distancia_km)
-    horas_estimadas = (distancia_km / melhor_caminhao.velocidade_media)  # Cálculo das horas estimadas para a entrega
+    horas_estimadas =  math.ceil(distancia_km / melhor_caminhao.velocidade_media)  # Cálculo das horas estimadas para a entrega
 
     return caminhão_selecionado, consumo, prazo, custo, horas_estimadas  

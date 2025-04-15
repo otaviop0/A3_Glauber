@@ -1,56 +1,132 @@
+cidades_destino = [
+    "Manaus", "Porto Velho", "Sao Luis",            # Norte
+    "Salvador", "Fortaleza", "Joao Pessoa",       # Nordeste
+    "Goiania", "Campo Grande", "Cuiaba",          # Centro-Oeste
+    "Rio De Janeiro", "Belo Horizonte", "Vitoria",# Sudeste
+    "Curitiba", "Porto Alegre", "Caxias Do Sul"   # Sul
+]
 
-# Este código tem como objetivo encontrar o centro de distribuição mais próximo de uma cidade de destino, utilizando a API OpenCage para obter as coordenadas geográficas e a biblioteca haversine para calcular a distância entre os pontos.
-# O código também inclui a definição de centros de distribuição com suas respectivas coordenadas, além de funções para obter as coordenadas de uma cidade e encontrar o centro mais próximo.
-
-import requests  # Biblioteca para fazer requisições HTTP
-from haversine import haversine  # Função para calcular a distância entre coordenadas geográficas   
-# haversine não calcula qual centro está mais próximo — ele só calcula a distância entre dois pontos geográficos. Ou seja, o haversine faz só o trabalho de medir "quantos km tem daqui até ali natal a rececife  tantos km, natal a são paulo tantos km". 
-
-#Abaixo comando para abrir no terminal e instalar as bibliotecas necessárias
-# pip install requests
-# pip install haversine
-
-# Chave da OpenCage API
-api_key = "b431b8eeb3bf4c58a5bb82877d41b534"  # Chave para acessar a API de geolocalização
-#Key_OP 00ceb07d37a34c7db5abf142fa3b62e2
-
-# Centros de distribuição com suas coordenadas (latitude, longitude)
-centros_distribuicao = {
-    "Florianópolis": (-27.5954, -48.5480),
-    "Belém": (-1.4558, -48.4903),
-    "Recife": (-8.0476, -34.8770),
-    "São Paulo": (-23.5505, -46.6333),
-    "Brasília": (-15.7801, -47.9292)
+# Dicionário com distâncias reais aproximadas entre cidades e CDs
+distancias_reais = {
+    "Manaus": {
+        "Belém": 1600,
+        "Recife": 3500,
+        "Brasília": 3900,
+        "São Paulo": 4300,
+        "Florianópolis": 4900
+    },
+    "Porto Velho": {
+        "Belém": 2800,
+        "Recife": 4100,
+        "Brasília": 2500,
+        "São Paulo": 2800,
+        "Florianópolis": 3300
+    },
+    "Sao Luis": {
+        "Belém": 212,   
+        "Recife": 1700, 
+        "Brasília": 2300, 
+        "São Paulo": 2600, 
+        "Florianópolis": 3100
+    },
+    "Salvador": {
+        "Belém": 2100,
+        "Recife": 800,
+        "Brasília": 1450,
+        "São Paulo": 2000,
+        "Florianópolis": 2600
+    },
+    "Fortaleza": {
+        "Belém": 1600,
+        "Recife": 800,
+        "Brasília": 2200,
+        "São Paulo": 3100,
+        "Florianópolis": 3700
+    },
+    "Joao Pessoa": {
+        "Belém": 1800,
+        "Recife": 120,
+        "Brasília": 2150,
+        "São Paulo": 2600,
+        "Florianópolis": 3100
+    },
+    "Goiania": {
+        "Belém": 1800,
+        "Recife": 2100,
+        "Brasília": 200,
+        "São Paulo": 900,
+        "Florianópolis": 1600
+    },
+    "Campo Grande": {
+        "Belém": 2600,
+        "Recife": 2900,
+        "Brasília": 1130,
+        "São Paulo": 1000,
+        "Florianópolis": 1300
+    },
+    "Cuiaba": {
+        "Belém": 2300,
+        "Recife": 2900,
+        "Brasília": 1150,
+        "São Paulo": 1600,
+        "Florianópolis": 2000
+    },
+    "Rio De Janeiro": {
+        "Belém": 2800,
+        "Recife": 2500,
+        "Brasília": 1200,
+        "São Paulo": 440,
+        "Florianópolis": 1100
+    },
+    "Belo Horizonte": {
+        "Belém": 2400,
+        "Recife": 2100,
+        "Brasília": 740,
+        "São Paulo": 600,
+        "Florianópolis": 1700
+    },
+    "Vitoria": {
+        "Belém": 2500,
+        "Recife": 2200,
+        "Brasília": 1230,
+        "São Paulo": 880,
+        "Florianópolis": 1500
+    },
+    "Curitiba": {
+        "Belém": 2800,
+        "Recife": 2600,
+        "Brasília": 1500,
+        "São Paulo": 400,
+        "Florianópolis": 300
+    },
+    "Porto Alegre": {
+        "Belém": 3800,
+        "Recife": 3600,
+        "Brasília": 2500,
+        "São Paulo": 1100,
+        "Florianópolis": 470
+    },
+    "Caxias Do Sul": {
+        "Belém": 3900,
+        "Recife": 3700,
+        "Brasília": 2600,
+        "São Paulo": 1200,
+        "Florianópolis": 460
+    }
 }
 
-# Função para obter as coordenadas de uma cidade usando a OpenCage API
-def get_Coordenadas(city):
-    url = f"https://api.opencagedata.com/geocode/v1/json?q={city}&key={api_key}"  # Monta a URL da API
-    response = requests.get(url)  # Faz a requisição para a API
-    data = response.json()  # Converte a resposta para JSON
-    
-    if data['results']:  # Verifica se há resultados na resposta
-        latitude = data['results'][0]['geometry']['lat']  # Obtém a latitude
-        longitude = data['results'][0]['geometry']['lng']  # Obtém a longitude
-        return (latitude, longitude)  # Retorna as coordenadas como uma tupla
-    
-    return None  # Retorna None se não encontrar resultados
-
-# Função para encontrar o centro de distribuição mais próximo de uma cidade
+# Função para encontrar o centro de distribuição mais próximo
 def encontrar_centro_proximo(cidade_destino):
-    destino_coordenadas = get_Coordenadas(cidade_destino)  # Obtém as coordenadas da cidade de destino
-    
-    if destino_coordenadas is None:  # Verifica se as coordenadas foram encontradas
-        return None, None  # Retorna None se não encontrar as coordenadas
+    if cidade_destino not in distancias_reais:
+        return "Sem dados", 0
 
-    distancia_minima = float('inf')  # Inicializa a distância mínima com um valor muito alto
-    centro_proximo = None  # Inicializa o centro mais próximo como None
+    distancias = distancias_reais[cidade_destino]  # Pega o dicionário de distâncias entre essa cidade e todos os centros
+    centro_proximo = min(distancias, key=distancias.get) # Encontra o centro com a menor distância usando a função min()
+    distancia_minima = distancias[centro_proximo]     # Armazena a menor distância encontrada
 
-    # Itera sobre os centros de distribuição para encontrar o mais próximo
-    for centro, coordenadas_centro in centros_distribuicao.items():
-        distancia = haversine(destino_coordenadas, coordenadas_centro)  # Calcula a distância entre o destino e o centro
-        if distancia < distancia_minima:  # Verifica se a distância é menor que a mínima encontrada
-            distancia_minima = distancia  # Atualiza a distância mínima
-            centro_proximo = centro  # Atualiza o centro mais próximo
+    return centro_proximo, distancia_minima # Retorna o nome do centro mais próximo e a distância até ele
 
-    return centro_proximo, distancia_minima  # Retorna o centro mais próximo e a distância
+# Exibe as cidades disponíveis apenas uma vez (opcional)
+if __name__ == "__main__":
+    cidades_disponiveis = [cidade for cidade in cidades_destino if cidade in distancias_reais]
+    print("Cidades destinos disponíveis:", ", ".join(cidades_disponiveis))
