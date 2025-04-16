@@ -1,12 +1,29 @@
+# Classe Grafo que representa um grafo direcionado com pesos
+class Grafo:
+    def __init__(self):
+        self.vertices = {}  # Dicionário onde cada chave é uma cidade de origem e o valor é outro dicionário com os destinos e seus pesos
+
+    def adicionar_aresta(self, origem, destino, peso):
+        if origem not in self.vertices:
+            self.vertices[origem] = {}  # Cria a entrada se a cidade de origem ainda não existe
+        self.vertices[origem][destino] = peso  # Adiciona a cidade de destino e a distância (peso)
+
+    def vizinhos(self, origem):
+        return self.vertices.get(origem, {})  # Retorna os destinos possíveis a partir da cidade de origem
+
+# Lista com as cidades de destino utilizadas no projeto
 cidades_destino = [
     "Manaus", "Porto Velho", "Sao Luis",            # Norte
-    "Salvador", "Fortaleza", "Joao Pessoa",       # Nordeste
-    "Goiania", "Campo Grande", "Cuiaba",          # Centro-Oeste
-    "Rio De Janeiro", "Belo Horizonte", "Vitoria",# Sudeste
-    "Curitiba", "Porto Alegre", "Caxias Do Sul"   # Sul
+    "Salvador", "Fortaleza", "Joao Pessoa",         # Nordeste
+    "Goiania", "Campo Grande", "Cuiaba",            # Centro-Oeste
+    "Rio De Janeiro", "Belo Horizonte", "Vitoria",  # Sudeste
+    "Curitiba", "Porto Alegre", "Caxias Do Sul"     # Sul
 ]
 
-# Dicionário com distâncias reais aproximadas entre cidades e CDs
+# Instancia o grafo
+grafo = Grafo()
+
+# Dicionário com as distâncias reais das cidades de destino até os centros de distribuição
 distancias_reais = {
     "Manaus": {
         "Belém": 1600,
@@ -23,10 +40,10 @@ distancias_reais = {
         "Florianópolis": 3300
     },
     "Sao Luis": {
-        "Belém": 212,   
-        "Recife": 1700, 
-        "Brasília": 2300, 
-        "São Paulo": 2600, 
+        "Belém": 212,
+        "Recife": 1700,
+        "Brasília": 2300,
+        "São Paulo": 2600,
         "Florianópolis": 3100
     },
     "Salvador": {
@@ -115,18 +132,22 @@ distancias_reais = {
     }
 }
 
-# Função para encontrar o centro de distribuição mais próximo
+# Adiciona cada aresta (cidade -> centro de distribuição com distância) ao grafo
+for cidade, centros in distancias_reais.items():
+    for centro, distancia in centros.items():
+        grafo.adicionar_aresta(cidade, centro, distancia)
+
+# Função que retorna o centro de distribuição mais próximo de uma cidade de destino
 def encontrar_centro_proximo(cidade_destino):
-    if cidade_destino not in distancias_reais:
-        return "Sem dados", 0
+    if cidade_destino not in grafo.vertices:
+        return "Sem dados", 0  # Retorna mensagem padrão se a cidade não tiver dados
 
-    distancias = distancias_reais[cidade_destino]  # Pega o dicionário de distâncias entre essa cidade e todos os centros
-    centro_proximo = min(distancias, key=distancias.get) # Encontra o centro com a menor distância usando a função min()
-    distancia_minima = distancias[centro_proximo]     # Armazena a menor distância encontrada
+    distancias = grafo.vizinhos(cidade_destino)  # Obtém todos os centros e distâncias
+    centro_proximo = min(distancias, key=distancias.get)  # Centro com menor distância
+    distancia_minima = distancias[centro_proximo]
+    return centro_proximo, distancia_minima  # Retorna o centro mais próximo e a distância
 
-    return centro_proximo, distancia_minima # Retorna o nome do centro mais próximo e a distância até ele
-
-# Exibe as cidades disponíveis apenas uma vez (opcional)
+# Código de teste: exibe as cidades de destino que têm dados no grafo
 if __name__ == "__main__":
-    cidades_disponiveis = [cidade for cidade in cidades_destino if cidade in distancias_reais]
+    cidades_disponiveis = [cidade for cidade in cidades_destino if cidade in grafo.vertices]
     print("Cidades destinos disponíveis:", ", ".join(cidades_disponiveis))

@@ -5,9 +5,9 @@ class Entrega:
         self.distancia = distancia
         self.caminhao = caminhao
         self.prazo = prazo
-        self.custo = custo  # Novo atributo: custo da entrega em R$
+        self.custo = custo  #  custo da entrega em R$
         self.horas_estimadas = horas_estimadas  # Novo atributo: horas estimadas
-        self.peso = peso  # Novo atributo: peso da carga
+        self.peso = peso  #  peso da carga
 
     def detalhes_entrega(self):
         return (f"\n===== DETALHES DA ENTREGA =====\n"

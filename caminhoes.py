@@ -35,13 +35,13 @@ centros_distribuicao_caminhoes = {
 
 # Lista com os tipos de caminhões disponíveis no sistema, do menor para o maior
 # Os valores de consumo são aproximados da realidade:
-# Van: 10 km/l → 0.10 l/km
-# Toco: 4 km/l → 0.25 l/km
-# Truck: 2.5 km/l → 0.40 l/km
+# Van: 10 km/l → 0.15 l/km
+# Toco: 4 km/l → 0.35 l/km
+# Truck: 2.5 km/l → 0.50 l/km
 caminhoes = [
-    Caminhao("Van", 1500, 0.10, 80, 8),                    # Ideal para cargas leves
-    Caminhao("Caminhão Toco (2 eixos)", 6000, 0.25, 70, 9), # Médio porte
-    Caminhao("Caminhão Truck (3 eixos)", 14000, 0.40, 60, 10)  # Grande porte
+    Caminhao("Van", 1500, 0.15, 80, 8),                    # Ideal para cargas leves
+    Caminhao("Caminhão Toco (2 eixos)", 6000, 0.35, 70, 9), # Médio porte
+    Caminhao("Caminhão Truck (3 eixos)", 14000, 0.50, 60, 10)  # Grande porte
 ]
 
 # Função que seleciona o caminhão ideal de acordo com o peso da carga, disponibilidade e distância

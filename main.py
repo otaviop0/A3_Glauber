@@ -14,7 +14,7 @@ while True:
     
     print("\n==== MENU ====")
     print("1 - Realizar nova entrega")
-    print("2 - Ver entregas realizadas")
+    print("2 - Ver entregas Cadastradas")
     print("0 - Sair")
     opcao = input("Escolha uma opção: ")
 
