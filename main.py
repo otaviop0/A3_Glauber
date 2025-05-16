@@ -15,6 +15,7 @@ while True:
     print("\n==== MENU ====")
     print("1 - Realizar nova entrega")
     print("2 - Ver entregas Cadastradas")
+    print("3 - Excluir entrega")
     print("0 - Sair")
     opcao = input("Escolha uma opção: ")
 
@@ -45,8 +46,31 @@ while True:
         if not entregas:
             print("Nenhuma entrega registrada.")
         else:
+            print("============== LISTA DE ENTREGAS CADASTRADAS ===============================================")
             for entrega in entregas:
                 print(entrega.detalhes_entrega())
+
+    elif opcao == "3":
+        if not entregas:           
+            print("\n==============  LISTA DE ENTREGAS ABAIXO ===============================================")
+            print("Nenhuma entrega registrada.")
+        else:
+            print("\n==============  LISTA DE ENTREGAS ABAIXO ===============================================")
+            for entrega in entregas:
+                print(entrega.detalhes_entrega())
+            try:
+                id_para_excluir = int(input("Digite o ID da entrega que deseja excluir: (digite n para cancelar) "))
+                
+                entrega_encontrada = next((e for e in entregas if e.id == id_para_excluir), None)
+                if entrega_encontrada:
+                    entregas.remove(entrega_encontrada)
+                    print("\n**************************************************")
+                    print(f"** Entrega com ID {id_para_excluir} foi excluída com sucesso.   **")
+                    print("**************************************************")
+                else:
+                    print("Entrega não encontrada.")
+            except ValueError:
+                print("ID inválido. Digite um número inteiro.")            
 
     elif opcao == "0":
         print("Encerrando o sistema.")
