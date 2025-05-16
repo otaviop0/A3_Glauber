@@ -11,10 +11,11 @@ class Grafo:
     def vizinhos(self, origem):
         return self.vertices.get(origem, {})  # Retorna os destinos possíveis a partir da cidade de origem
 
-# Lista com as cidades de destino utilizadas no projeto
+
+# Lista com as cidades de destino utilizadas no projeto (incluindo Natal)
 cidades_destino = [
     "Manaus", "Porto Velho", "Sao Luis",            # Norte
-    "Salvador", "Fortaleza", "Joao Pessoa",         # Nordeste
+    "Salvador", "Fortaleza", "Joao Pessoa", "Natal",  # Nordeste (Natal incluída)
     "Goiania", "Campo Grande", "Cuiaba",            # Centro-Oeste
     "Rio De Janeiro", "Belo Horizonte", "Vitoria",  # Sudeste
     "Curitiba", "Porto Alegre", "Caxias Do Sul"     # Sul
@@ -64,6 +65,13 @@ distancias_reais = {
         "Belém": 1800,
         "Recife": 120,
         "Brasília": 2150,
+        "São Paulo": 2600,
+        "Florianópolis": 3100
+    },
+    "Natal": {
+        "Belém": 2000,
+        "Recife": 350,
+        "Brasília": 2100,
         "São Paulo": 2600,
         "Florianópolis": 3100
     },
@@ -143,6 +151,9 @@ def encontrar_centro_proximo(cidade_destino):
         return "Sem dados", 0  # Retorna mensagem padrão se a cidade não tiver dados
 
     distancias = grafo.vizinhos(cidade_destino)  # Obtém todos os centros e distâncias
+    if not distancias:
+        return "Sem centros disponíveis", 0
+
     centro_proximo = min(distancias, key=distancias.get)  # Centro com menor distância
     distancia_minima = distancias[centro_proximo]
     return centro_proximo, distancia_minima  # Retorna o centro mais próximo e a distância
@@ -151,3 +162,7 @@ def encontrar_centro_proximo(cidade_destino):
 if __name__ == "__main__":
     cidades_disponiveis = [cidade for cidade in cidades_destino if cidade in grafo.vertices]
     print("Cidades destinos disponíveis:", ", ".join(cidades_disponiveis))
+
+    # Exemplo de teste para Natal
+    centro, distancia = encontrar_centro_proximo("Natal")
+    print(f"Centro mais próximo de Natal: {centro} a {distancia} km")
